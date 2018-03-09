@@ -4,6 +4,7 @@ const merge = require('webpack-merge');
 const path = require('path');
 
 function init(projectName, requestedBuild) {
+	console.log('TÆÆÆST', projectName, requestedBuild);
 	const name = (() => {
 		const capitalise = (string) => string.charAt(0).toUpperCase() + string.slice(1);
 		const nameArray = projectName.split('-');
