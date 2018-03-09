@@ -13,6 +13,8 @@ function init(projectName, requestedBuild, buildRoot) {
 		return `${capitalise(nameArray[0])}${capitalise(nameArray[1])}`;
 	})();
 
+	console.log('BUILD', path.resolve(__dirname), buildRoot);
+
 	const baseConfig = {
 		output: {
 			path: path.resolve(buildRoot + '/dist/'),
