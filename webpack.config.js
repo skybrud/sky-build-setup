@@ -1,9 +1,6 @@
 const webpack = require('webpack');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const merge = require('webpack-merge');
-const path = require('path');
-
-console.log('tææææt');
 
 function init(projectName, requestedBuild, buildRoot) {
 	const name = (() => {
@@ -12,8 +9,6 @@ function init(projectName, requestedBuild, buildRoot) {
 
 		return `${capitalise(nameArray[0])}${capitalise(nameArray[1])}`;
 	})();
-
-	console.log('BUILD', path.resolve(__dirname), buildRoot);
 
 	const baseConfig = {
 		output: {
