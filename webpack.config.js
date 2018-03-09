@@ -3,8 +3,9 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const merge = require('webpack-merge');
 const path = require('path');
 
-function init(projectName, requestedBuild) {
-	console.log('TÆÆÆST', projectName, requestedBuild);
+console.log('tææææt');
+
+function init(projectName, requestedBuild, buildRoot) {
 	const name = (() => {
 		const capitalise = (string) => string.charAt(0).toUpperCase() + string.slice(1);
 		const nameArray = projectName.split('-');
@@ -14,14 +15,14 @@ function init(projectName, requestedBuild) {
 
 	const baseConfig = {
 		output: {
-			path: path.resolve(__dirname + '/dist/'),
+			path: path.resolve(buildRoot + '/dist/'),
 		},
 		module: {
 			loaders: [
 				{
 					test: /\.js$/,
 					loader: 'babel-loader',
-					include: __dirname,
+					include: buildRoot,
 					exclude: /node_modules/,
 				},
 				{
@@ -55,7 +56,7 @@ function init(projectName, requestedBuild) {
 	const builds = {
 		module: {
 			target: 'node',
-			entry: path.resolve(__dirname + '/src/' + name + '.vue'),
+			entry: path.resolve(buildRoot + '/src/' + name + '.vue'),
 			output: {
 				filename: name.toLowerCase() + '.js',
 				libraryTarget: 'umd',
@@ -64,7 +65,7 @@ function init(projectName, requestedBuild) {
 			},
 		},
 		plugin: {
-			entry: path.resolve(__dirname + '/src/plugin.js'),
+			entry: path.resolve(buildRoot + '/src/plugin.js'),
 			output: {
 				filename: name.toLowerCase() + '.min.js',
 				libraryTarget: 'window',
@@ -72,7 +73,7 @@ function init(projectName, requestedBuild) {
 			}
 		},
 		service: {
-			entry: path.resolve(__dirname + '/src/' + name + '.js'),
+			entry: path.resolve(buildRoot + '/src/' + name + '.js'),
 			output: {
 				filename: name.toLocaleLowerCase() + '.js',
 				libraryTarget: 'umd',
@@ -85,4 +86,4 @@ function init(projectName, requestedBuild) {
 	return merge(baseConfig, builds[requestedBuild]);
 }
 
-module.export = init;
+module.exports = init;
