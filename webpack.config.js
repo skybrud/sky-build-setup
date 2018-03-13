@@ -1,6 +1,17 @@
 const webpack = require('webpack');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const merge = require('webpack-merge');
+const path = require('path');
+
+const babelLoaderSetup = {
+	loader: 'babel-loader',
+	options: {
+		babelrc: false,
+		presets: ['babel-preset-env'],
+		plugins: ['babel-plugin-transform-runtime'],
+		comments: false,
+	}
+}
 
 function init(projectName, requestedBuild, buildRoot) {
 	const name = (() => {
@@ -15,23 +26,23 @@ function init(projectName, requestedBuild, buildRoot) {
 			path: path.resolve(buildRoot + '/dist/'),
 		},
 		module: {
-			loaders: [
+			rules: [
 				{
 					test: /\.js$/,
-					loader: 'babel-loader',
 					include: buildRoot,
 					exclude: /node_modules/,
+					use: babelLoaderSetup
 				},
 				{
 					test: /\.vue$/,
 					loader: 'vue-loader',
 					options: {
-						preserveWhitespace: false,
 						postcss: [
 							require('autoprefixer')(),
 						],
 						loaders: {
 							css: 'vue-style-loader!css-loader!sass-loader',
+							js: babelLoaderSetup,
 						},
 					},
 				},
@@ -56,8 +67,12 @@ function init(projectName, requestedBuild, buildRoot) {
 			entry: path.resolve(buildRoot + '/src/' + name + '.vue'),
 			output: {
 				filename: name.toLowerCase() + '.js',
+				library: {
+					root: name,
+					amd: projectName,
+					commonjs: projectName,
+				},
 				libraryTarget: 'umd',
-				library: name,
 				umdNamedDefine: true,
 			},
 		},
@@ -74,7 +89,11 @@ function init(projectName, requestedBuild, buildRoot) {
 			output: {
 				filename: name.toLocaleLowerCase() + '.js',
 				libraryTarget: 'umd',
-				library: name,
+				library: {
+					root: name,
+					amd: projectName,
+					commonjs: projectName,
+				},
 				umdNamedDefine: true,
 			},
 		}
