@@ -1,6 +1,6 @@
 {
   "name": "sky-build-setup",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Build setup used by skybrud.dk",
   "main": "webpack.config.js",
   "author": "Skybrud.dk",
@@ -11,7 +11,7 @@
   },
   "private": true,
   "scripts": {
-	  "release": "np"
+    "release": "np"
   },
   "dependencies": {
     "babel-core": "^6.26.0",
@@ -33,6 +33,6 @@
     "webpack-merge": "^4.1.0"
   },
   "devDependencies": {
-	  "np": "*"
+    "np": "*"
   }
 }
