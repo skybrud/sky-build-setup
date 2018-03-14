@@ -64,7 +64,7 @@ function init(projectName, requestedBuild, buildRoot) {
 	const builds = {
 		module: {
 			target: 'node',
-			entry: path.resolve(buildRoot + '/src/' + name + '.vue'),
+			entry: path.resolve(buildRoot + '/src/' + name + '.js'),
 			output: {
 				filename: name.toLowerCase() + '.js',
 				library: {
