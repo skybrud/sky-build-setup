@@ -63,12 +63,18 @@ function init(projectName, requestedBuild, buildRoot) {
 
 	const builds = {
 		plugin: {
-			entry: path.resolve(buildRoot + '/src/plugin.js'),
+			target: 'node',
+			entry: path.resolve(buildRoot + '/src/index.js'),
 			output: {
-				filename: name.toLowerCase() + '.min.js',
-				libraryTarget: 'window',
-				library: name,
-			}
+				filename: name.toLowerCase() + '.js',
+				library: {
+					root: name,
+					amd: projectName,
+					commonjs: projectName,
+				},
+				libraryTarget: 'umd',
+				umdNamedDefine: true,
+			},
 		},
 		service: {
 			entry: path.resolve(buildRoot + '/src/' + name + '.js'),
