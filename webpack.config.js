@@ -50,6 +50,7 @@ function init(projectName, requestedBuild, buildRoot) {
 		},
 		plugins: [
 			new UglifyJsPlugin({
+				include: /\.min\.js$/,
 				sourceMap: false,
 				uglifyOptions: {
 					mangle: true,
@@ -64,9 +65,12 @@ function init(projectName, requestedBuild, buildRoot) {
 	const builds = {
 		plugin: {
 			target: 'node',
-			entry: path.resolve(buildRoot + '/src/index.js'),
+			entry: {
+				[name.toLowerCase()]: path.resolve(buildRoot + '/src/index.js'),
+				[name.toLowerCase() + '.min']: path.resolve(buildRoot + '/src/index.js'),
+			},
 			output: {
-				filename: name.toLowerCase() + '.js',
+				filename: '[name].js',
 				library: {
 					root: name,
 					amd: projectName,
