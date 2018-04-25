@@ -18,7 +18,7 @@ function init(projectName, requestedBuild, buildRoot) {
 		const capitalise = (string) => string.charAt(0).toUpperCase() + string.slice(1);
 		const nameArray = projectName.split('-');
 
-		return `${capitalise(nameArray[0])}${capitalise(nameArray[1])}`;
+		return nameArray.reduce((acc, cur) => { return acc += capitalise(cur)}, '');
 	})();
 
 	const baseConfig = {
