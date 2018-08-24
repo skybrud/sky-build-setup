@@ -1,9 +1,9 @@
 // rollup.config.js
-import vue from 'rollup-plugin-vue';
-import buble from 'rollup-plugin-buble';
-import uglify from 'rollup-plugin-uglify-es';
-import minimist from 'minimist';
-import path from 'path';
+const vue  require('rollup-plugin-vue');
+const buble require('rollup-plugin-buble');
+const uglify require('rollup-plugin-uglify-es');
+const minimist require('minimist');
+const path require('path');
 
 const argv = minimist(process.argv.slice(2));
 
@@ -29,8 +29,7 @@ if (argv.format === 'iife') {
 
 // export default config;
 
-
-export default function init(projectName, requestedBuild, buildRoot) {
+function init(projectName, requestedBuild, buildRoot) {
 	const name = (() => {
 		const capitalise = (string) => string.charAt(0).toUpperCase() + string.slice(1);
 		const nameArray = projectName.split('-');
@@ -63,3 +62,5 @@ export default function init(projectName, requestedBuild, buildRoot) {
 
 	return config;
 };
+
+module.exports = init;
