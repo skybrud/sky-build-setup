@@ -1,9 +1,9 @@
 // rollup.config.js
-const vue  require('rollup-plugin-vue');
-const buble require('rollup-plugin-buble');
-const uglify require('rollup-plugin-uglify-es');
-const minimist require('minimist');
-const path require('path');
+const vue = require('rollup-plugin-vue');
+const buble = require('rollup-plugin-buble');
+const uglify = require('rollup-plugin-uglify-es');
+const minimist = require('minimist');
+const path = require('path');
 
 const argv = minimist(process.argv.slice(2));
 
