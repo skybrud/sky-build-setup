@@ -18,7 +18,6 @@ function init(packageJson, buildRoot) {
 				name: pascaledName,
 				dir: path.resolve(buildRoot + '/dist/'),
 				exports: 'named',
-				format: 'umd',
 			},
 			plugins: [
 				scss({ output: false }),
