@@ -14,11 +14,14 @@
     "release": "np"
   },
   "dependencies": {
+    "node-sass": "^4.9.3",
     "rollup": "^0.57.1",
-    "rollup-plugin-buble": "^0.19.2",
-    "rollup-plugin-vue": "^3.0.0",
+    "rollup-plugin-scss": "^0.4.0",
+	"rollup-plugin-vue": "^4.0.0",
+	"rollup-plugin-buble": "^0.19.2",
     "vue": "^2.5.16",
-	"vue-template-compiler": "^2.5.16"
+	"vue-template-compiler": "^2.5.16",
+	"rimraf": "^2.6.1"
   },
   "devDependencies": {
     "np": "*"

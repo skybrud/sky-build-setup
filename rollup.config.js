@@ -1,6 +1,7 @@
-const vue = require('rollup-plugin-vue');
-const buble = require('rollup-plugin-buble');
+const vue = require('rollup-plugin-vue').default;
 const path = require('path');
+const buble = require('rollup-plugin-buble');
+const scss = require('rollup-plugin-scss');
 
 function init(packageJson, buildRoot) {
 	const pascaledName = (() => {
@@ -11,21 +12,20 @@ function init(packageJson, buildRoot) {
 	})();
 
 	const config = {
-		external: Object.keys(packageJson.dependencies),
-		input: path.resolve(buildRoot + '/src/index.js'),
-		output: {
-			name: pascaledName,
-			dir: path.resolve(buildRoot + '/dist/'),
-			exports: 'named',
-		},
-		plugins: [
-			vue({
-				css: true,
-				compileTemplate: true,
-			}),
-			buble(),
-		],
-	};
+			external: Object.keys(packageJson.dependencies),
+			input: path.resolve(buildRoot + '/src/index.js'),
+			output: {
+				name: pascaledName,
+				dir: path.resolve(buildRoot + '/dist/'),
+				exports: 'named',
+				format: 'umd',
+			},
+			plugins: [
+				scss({ output: false }),
+				vue({ css: false }),
+				buble(),
+			],
+		};
 
 	return config;
 };
