@@ -1,7 +1,5 @@
 const vue = require('rollup-plugin-vue').default;
 const path = require('path');
-const buble = require('rollup-plugin-buble');
-const scss = require('rollup-plugin-scss');
 
 function init(packageJson, buildRoot) {
 	const pascaledName = (() => {
@@ -11,20 +9,42 @@ function init(packageJson, buildRoot) {
 		return nameArray.reduce((acc, cur) => { return acc += pascalize(cur)}, '');
 	})();
 
-	const config = {
-			external: Object.keys(packageJson.dependencies),
+	const config = [
+		// ESM build to be used with webpack/rollup.
+		{
+			input: path.resolve(buildRoot + '/src/index.js'),
+			output: {
+				format: 'esm',
+				file: path.resolve(buildRoot + '/dist/' + packageJson.name + '.esm.js')
+			},
+			plugins: [
+				vue()
+			]
+		},
+		// SSR build.
+		{
+			input: path.resolve(buildRoot + '/src/index.js'),
+			output: {
+				format: 'cjs',
+				file: path.resolve(buildRoot + '/dist/' + packageJson.name + '.ssr.js')
+			},
+			plugins: [
+				vue({ template: { optimizeSSR: true } })
+			]
+		},
+		// Browser build.
+		{
 			input: path.resolve(buildRoot + '/src/index.js'),
 			output: {
 				name: pascaledName,
-				dir: path.resolve(buildRoot + '/dist/'),
-				exports: 'named',
+				format: 'iife',
+				file: path.resolve(buildRoot + '/dist/' + packageJson.name + '.js')
 			},
 			plugins: [
-				scss({ output: false }),
-				vue({ css: false }),
-				buble(),
-			],
-		};
+				vue()
+			]
+		}
+	];
 
 	return config;
 };
