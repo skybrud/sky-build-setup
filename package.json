@@ -22,8 +22,5 @@
     "vue": "^2.5.16",
 	"vue-template-compiler": "^2.5.16",
 	"rimraf": "^2.6.1"
-  },
-  "devDependencies": {
-    "np": "*"
   }
 }
