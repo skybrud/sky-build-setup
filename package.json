@@ -10,9 +10,6 @@
     "url": "https://github.com/skybrud/sky-build-setup.git"
   },
   "private": true,
-  "scripts": {
-    "release": "np"
-  },
   "dependencies": {
     "postcss": "^7.0.2",
     "rimraf": "^2.6.2",
