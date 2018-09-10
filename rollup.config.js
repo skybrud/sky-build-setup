@@ -12,10 +12,12 @@ function init(packageJson, buildRoot) {
 	const config = [
 		// ESM build to be used with webpack/rollup.
 		{
+			external: Object.keys(packageJson.dependencies),
 			input: path.resolve(buildRoot + '/src/index.js'),
 			output: {
 				format: 'esm',
-				file: path.resolve(buildRoot + '/dist/' + packageJson.name + '.esm.js')
+				file: path.resolve(buildRoot + '/dist/' + packageJson.name + '.esm.js'),
+				exports: 'named',
 			},
 			plugins: [
 				vue()
@@ -23,10 +25,12 @@ function init(packageJson, buildRoot) {
 		},
 		// SSR build.
 		{
+			external: Object.keys(packageJson.dependencies),
 			input: path.resolve(buildRoot + '/src/index.js'),
 			output: {
 				format: 'cjs',
-				file: path.resolve(buildRoot + '/dist/' + packageJson.name + '.ssr.js')
+				file: path.resolve(buildRoot + '/dist/' + packageJson.name + '.ssr.js'),
+				exports: 'named',
 			},
 			plugins: [
 				vue({ template: { optimizeSSR: true } })
@@ -38,7 +42,8 @@ function init(packageJson, buildRoot) {
 			output: {
 				name: pascaledName,
 				format: 'iife',
-				file: path.resolve(buildRoot + '/dist/' + packageJson.name + '.js')
+				file: path.resolve(buildRoot + '/dist/' + packageJson.name + '.js'),
+				exports: 'named',
 			},
 			plugins: [
 				vue()
