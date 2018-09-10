@@ -12,7 +12,7 @@ function init(packageJson, buildRoot) {
 	const config = [
 		// ESM build to be used with webpack/rollup.
 		{
-			external: Object.keys(packageJson.dependencies),
+			external: [...Object.keys(packageJson.dependencies), ...Object.keys(packageJson.peerDependencies)],
 			input: path.resolve(buildRoot + '/src/index.js'),
 			output: {
 				format: 'esm',
@@ -25,7 +25,7 @@ function init(packageJson, buildRoot) {
 		},
 		// SSR build.
 		{
-			external: Object.keys(packageJson.dependencies),
+			external: [...Object.keys(packageJson.dependencies), ...Object.keys(packageJson.peerDependencies)],
 			input: path.resolve(buildRoot + '/src/index.js'),
 			output: {
 				format: 'cjs',
