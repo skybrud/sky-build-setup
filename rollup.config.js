@@ -37,18 +37,18 @@ function init(packageJson, buildRoot) {
 			]
 		},
 		// Browser build.
-		{
-			input: path.resolve(buildRoot + '/src/index.js'),
-			output: {
-				name: pascaledName,
-				format: 'iife',
-				file: path.resolve(buildRoot + '/dist/' + packageJson.name + '.js'),
-				exports: 'named',
-			},
-			plugins: [
-				vue()
-			]
-		}
+		// {
+		// 	input: path.resolve(buildRoot + '/src/index.js'),
+		// 	output: {
+		// 		name: pascaledName,
+		// 		format: 'iife',
+		// 		file: path.resolve(buildRoot + '/dist/' + packageJson.name + '.js'),
+		// 		exports: 'named',
+		// 	},
+		// 	plugins: [
+		// 		vue()
+		// 	]
+		// }
 	];
 
 	return config;
