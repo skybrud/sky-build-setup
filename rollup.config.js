@@ -1,4 +1,5 @@
 const vue = require('rollup-plugin-vue').default;
+const buble = require('rollup-plugin-buble');
 const path = require('path');
 
 function init(packageJson, buildRoot) {
@@ -33,22 +34,10 @@ function init(packageJson, buildRoot) {
 				exports: 'named',
 			},
 			plugins: [
-				vue({ template: { optimizeSSR: true } })
+				vue({template: { optimizeSSR: true } }),
+				buble({ transforms: { dangerousForOf: true } }),
 			]
 		},
-		// Browser build.
-		// {
-		// 	input: path.resolve(buildRoot + '/src/index.js'),
-		// 	output: {
-		// 		name: pascaledName,
-		// 		format: 'iife',
-		// 		file: path.resolve(buildRoot + '/dist/' + packageJson.name + '.js'),
-		// 		exports: 'named',
-		// 	},
-		// 	plugins: [
-		// 		vue()
-		// 	]
-		// }
 	];
 
 	return config;
