@@ -1,5 +1,6 @@
 const vue = require('rollup-plugin-vue').default;
 const buble = require('rollup-plugin-buble');
+const scss = require('rollup-plugin-scss');
 const path = require('path');
 
 function init(packageJson, buildRoot) {
@@ -21,7 +22,8 @@ function init(packageJson, buildRoot) {
 				exports: 'named',
 			},
 			plugins: [
-				vue()
+				scss({ output: path.resolve(buildRoot + '/dist/' + packageJson.name + '.css')}),
+				vue({ css: false }),
 			]
 		},
 		// SSR build.
@@ -34,7 +36,11 @@ function init(packageJson, buildRoot) {
 				exports: 'named',
 			},
 			plugins: [
-				vue({template: { optimizeSSR: true } }),
+				vue({
+					css: false,
+					template: { optimizeSSR: true },
+				}),
+				scss({ output: path.resolve(buildRoot + '/dist/' + packageJson.name + '.css')}),
 				buble({ transforms: { dangerousForOf: true } }),
 			]
 		},
