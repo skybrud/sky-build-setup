@@ -24,6 +24,7 @@ function init(packageJson, buildRoot) {
 			plugins: [
 				scss({ output: path.resolve(buildRoot + '/dist/' + packageJson.name + '.css')}),
 				vue({ css: false }),
+				buble({ transforms: { dangerousForOf: true } }),
 			]
 		},
 		// SSR build.
