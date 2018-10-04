@@ -1,6 +1,6 @@
 {
   "name": "sky-build-setup",
-  "version": "2.0.6-0",
+  "version": "2.0.6",
   "description": "Build setup used by skybrud.dk",
   "main": "rollup.config.js",
   "author": "Skybrud.dk",
